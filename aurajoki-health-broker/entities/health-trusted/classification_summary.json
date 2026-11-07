@@ -1,0 +1,37 @@
+[
+ {
+  "type": "DocumentReference",
+  "scope": "/Classification/Restricted/FreeText",
+  "count": 30103
+ },
+ {
+  "type": "EDWeeklyStatistic",
+  "scope": "/Classification/Confidential/SmallCell",
+  "count": 29170
+ },
+ {
+  "type": "EDWeeklyStatistic",
+  "scope": "/Classification/Public/Aggregate",
+  "count": 999
+ },
+ {
+  "type": "Encounter",
+  "scope": "/Classification/Confidential/HealthData",
+  "count": 46398
+ },
+ {
+  "type": "Observation",
+  "scope": "/Classification/Confidential/HealthData",
+  "count": 130341
+ },
+ {
+  "type": "Patient",
+  "scope": "/Classification/Restricted/DirectIdentifier",
+  "count": 26873
+ },
+ {
+  "type": "Practitioner",
+  "scope": "/Classification/Internal/Staff",
+  "count": 400
+ }
+]

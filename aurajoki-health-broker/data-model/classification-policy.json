@@ -1,0 +1,270 @@
+{
+ "description": "Classification of the health-trusted tenant and what each sharing scenario may request. Entity level: NGSI-LD scope + scopeQ. Attribute level: pick (Attribute Projection Language). Enforcement belongs in the PEP/PDP in front of the broker (e.g. FIWARE Data Space Connector, ODRL policies); scopeQ and pick only filter.",
+ "tenant": "health-trusted",
+ "smallCellThreshold": 5,
+ "tiers": {
+  "/Classification/Public/Aggregate": "Aggregates with at least k=5 visits per cell. May be published.",
+  "/Classification/Internal/Staff": "Staff directory (ids, names, roles). Hospital-internal; staff names are identifiers in notes.",
+  "/Classification/Confidential/HealthData": "Pseudonymised special-category health data (GDPR Art. 9). Only in a controlled environment under a permit (Finnish Act on Secondary Use of Health and Social Data / EHDS).",
+  "/Classification/Confidential/QuasiIdentifier": "Attribute of a Confidential entity that helps re-identification when combined with outside sources (exact timestamps, exact age, municipality). Release only coarsened.",
+  "/Classification/Confidential/Pseudonym": "Link to the pseudonymous patient. Enables revisit analysis; never shared outside a controlled environment.",
+  "/Classification/Confidential/SmallCell": "Aggregate cell with fewer than k=5 visits. Disclosive; not for publication.",
+  "/Classification/Restricted/QuasiIdentifier": "Strong quasi-identifier (ambulance call sign). Treating unit only.",
+  "/Classification/Restricted/FreeText": "Free text that contains identifying items (names, places, dates). Treating unit only.",
+  "/Classification/Restricted/DirectIdentifier": "Direct identifiers: identity code, name, birth date, phone, address. Treating unit only."
+ },
+ "tierOrder": [
+  "Public",
+  "Internal",
+  "Confidential",
+  "Restricted"
+ ],
+ "entityScopes": {
+  "Patient": [
+   "/Classification/Restricted/DirectIdentifier"
+  ],
+  "Practitioner": [
+   "/Classification/Internal/Staff"
+  ],
+  "Encounter": [
+   "/Classification/Confidential/HealthData"
+  ],
+  "Observation": [
+   "/Classification/Confidential/HealthData"
+  ],
+  "DocumentReference": [
+   "/Classification/Restricted/FreeText"
+  ],
+  "EDWeeklyStatistic": [
+   "/Classification/Public/Aggregate",
+   "/Classification/Confidential/SmallCell"
+  ]
+ },
+ "attributeClassification": {
+  "Patient": {
+   "identifier": "/Classification/Restricted/DirectIdentifier",
+   "name": "/Classification/Restricted/DirectIdentifier",
+   "birthDate": "/Classification/Restricted/DirectIdentifier",
+   "gender": "/Classification/Restricted/DirectIdentifier",
+   "telephone": "/Classification/Restricted/DirectIdentifier",
+   "address": "/Classification/Restricted/DirectIdentifier",
+   "identityStatus": "/Classification/Restricted/DirectIdentifier"
+  },
+  "Practitioner": {
+   "identifier": "/Classification/Internal/Staff",
+   "name": "/Classification/Internal/Staff",
+   "role": "/Classification/Internal/Staff"
+  },
+  "Encounter": {
+   "identifier": "/Classification/Confidential/HealthData",
+   "encounterClass": "/Classification/Confidential/HealthData",
+   "subject": "/Classification/Confidential/Pseudonym",
+   "attendingPractitioner": "/Classification/Confidential/HealthData",
+   "arrivalDateTime": "/Classification/Confidential/QuasiIdentifier",
+   "dischargeDateTime": "/Classification/Confidential/QuasiIdentifier",
+   "arrivalMode": "/Classification/Confidential/HealthData",
+   "ambulanceUnit": "/Classification/Restricted/QuasiIdentifier",
+   "triageCategory": "/Classification/Confidential/HealthData",
+   "chiefComplaint": "/Classification/Restricted/FreeText",
+   "primaryDiagnosis": "/Classification/Confidential/HealthData",
+   "secondaryDiagnosis": "/Classification/Confidential/HealthData",
+   "systolicBloodPressure": "/Classification/Confidential/HealthData",
+   "diastolicBloodPressure": "/Classification/Confidential/HealthData",
+   "heartRate": "/Classification/Confidential/HealthData",
+   "respiratoryRate": "/Classification/Confidential/HealthData",
+   "bodyTemperature": "/Classification/Confidential/HealthData",
+   "oxygenSaturation": "/Classification/Confidential/HealthData",
+   "painScore": "/Classification/Confidential/HealthData",
+   "lengthOfStay": "/Classification/Confidential/HealthData",
+   "dischargeDisposition": "/Classification/Confidential/HealthData",
+   "readmittedWithin30Days": "/Classification/Confidential/HealthData",
+   "ageAtArrival": "/Classification/Confidential/QuasiIdentifier",
+   "ageBand": "/Classification/Confidential/HealthData",
+   "sex": "/Classification/Confidential/HealthData",
+   "residenceMunicipality": "/Classification/Confidential/QuasiIdentifier",
+   "missingAttributes": "/Classification/Confidential/HealthData"
+  },
+  "Observation": {
+   "identifier": "/Classification/Confidential/HealthData",
+   "category": "/Classification/Confidential/HealthData",
+   "code": "/Classification/Confidential/HealthData",
+   "name": "/Classification/Confidential/HealthData",
+   "subject": "/Classification/Confidential/Pseudonym",
+   "encounter": "/Classification/Confidential/HealthData",
+   "effectiveDateTime": "/Classification/Confidential/QuasiIdentifier",
+   "valueQuantity": "/Classification/Confidential/HealthData",
+   "valueString": "/Classification/Confidential/HealthData",
+   "referenceRange": "/Classification/Confidential/HealthData",
+   "interpretation": "/Classification/Confidential/HealthData"
+  },
+  "DocumentReference": {
+   "identifier": "/Classification/Restricted/FreeText",
+   "noteType": "/Classification/Restricted/FreeText",
+   "subject": "/Classification/Restricted/FreeText",
+   "encounter": "/Classification/Restricted/FreeText",
+   "author": "/Classification/Restricted/FreeText",
+   "authoredDateTime": "/Classification/Restricted/FreeText",
+   "language": "/Classification/Restricted/FreeText",
+   "text": "/Classification/Restricted/FreeText"
+  },
+  "EDWeeklyStatistic": {
+   "isoWeek": "per entity scope",
+   "municipality": "per entity scope",
+   "ageBand": "per entity scope",
+   "sex": "per entity scope",
+   "diagnosisGroup": "per entity scope",
+   "visitCount": "per entity scope",
+   "disclosureThreshold": "per entity scope"
+  }
+ },
+ "scenarios": {
+  "TREATING-UNIT": {
+   "description": "Hospital clinical staff under a care relationship. Everything.",
+   "requests": [
+    {
+     "type": "Patient",
+     "scopeQ": "/Classification/#"
+    },
+    {
+     "type": "Practitioner",
+     "scopeQ": "/Classification/#"
+    },
+    {
+     "type": "Encounter",
+     "scopeQ": "/Classification/#"
+    },
+    {
+     "type": "Observation",
+     "scopeQ": "/Classification/#"
+    },
+    {
+     "type": "DocumentReference",
+     "scopeQ": "/Classification/#"
+    },
+    {
+     "type": "EDWeeklyStatistic",
+     "scopeQ": "/Classification/#"
+    }
+   ]
+  },
+  "HEALTH-S1": {
+   "description": "Secondary-use research in a controlled environment (permit). Pseudonymised records; no direct identifiers, no free text, no call signs. Pseudonym kept for revisits (H-U6).",
+   "requests": [
+    {
+     "type": "Encounter",
+     "scopeQ": "/Classification/Confidential/HealthData",
+     "pick": [
+      "identifier",
+      "encounterClass",
+      "subject",
+      "attendingPractitioner",
+      "arrivalDateTime",
+      "dischargeDateTime",
+      "arrivalMode",
+      "triageCategory",
+      "primaryDiagnosis",
+      "secondaryDiagnosis",
+      "systolicBloodPressure",
+      "diastolicBloodPressure",
+      "heartRate",
+      "respiratoryRate",
+      "bodyTemperature",
+      "oxygenSaturation",
+      "painScore",
+      "lengthOfStay",
+      "dischargeDisposition",
+      "readmittedWithin30Days",
+      "ageAtArrival",
+      "ageBand",
+      "sex",
+      "residenceMunicipality",
+      "missingAttributes",
+      "dataProvider"
+     ]
+    },
+    {
+     "type": "Observation",
+     "scopeQ": "/Classification/Confidential/HealthData",
+     "pick": [
+      "identifier",
+      "category",
+      "code",
+      "name",
+      "subject",
+      "encounter",
+      "effectiveDateTime",
+      "valueQuantity",
+      "valueString",
+      "referenceRange",
+      "interpretation",
+      "dataProvider"
+     ]
+    },
+    {
+     "type": "EDWeeklyStatistic",
+     "scopeQ": "/Classification/Public/#"
+    }
+   ],
+   "denied": [
+    "Patient",
+    "DocumentReference",
+    "Practitioner",
+    "chiefComplaint",
+    "ambulanceUnit"
+   ]
+  },
+  "HEALTH-S2": {
+   "description": "Public weekly dashboard. Only cells with at least k visits.",
+   "requests": [
+    {
+     "type": "EDWeeklyStatistic",
+     "scopeQ": "/Classification/Public/#"
+    }
+   ],
+   "denied": [
+    "everything else",
+    "EDWeeklyStatistic with scope Confidential/SmallCell"
+   ]
+  },
+  "HEALTH-S3": {
+   "description": "AI vendor training an admission model from triage-time information. No patient link, no exact times/age/municipality, no diagnoses (not known at triage; label leakage).",
+   "requests": [
+    {
+     "type": "Encounter",
+     "scopeQ": "/Classification/Confidential/HealthData",
+     "pick": [
+      "arrivalMode",
+      "triageCategory",
+      "systolicBloodPressure",
+      "diastolicBloodPressure",
+      "heartRate",
+      "respiratoryRate",
+      "bodyTemperature",
+      "oxygenSaturation",
+      "painScore",
+      "ageBand",
+      "sex",
+      "dischargeDisposition",
+      "lengthOfStay"
+     ]
+    }
+   ],
+   "denied": [
+    "Patient",
+    "DocumentReference",
+    "Practitioner",
+    "Observation",
+    "subject",
+    "identifier",
+    "arrivalDateTime",
+    "dischargeDateTime",
+    "ageAtArrival",
+    "residenceMunicipality",
+    "primaryDiagnosis",
+    "secondaryDiagnosis",
+    "chiefComplaint",
+    "ambulanceUnit"
+   ]
+  }
+ }
+}

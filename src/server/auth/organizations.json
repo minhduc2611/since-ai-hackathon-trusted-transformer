@@ -1,0 +1,23 @@
+[
+  {
+    "id": "trusted-lab",
+    "name": "TrustED Lab (local)",
+    "idp": "Microsoft Entra ID",
+    "ssoDomain": "trusted.example",
+    "allowedCidrs": ["127.0.0.1/32", "::1/128", "192.168.0.0/16"]
+  },
+  {
+    "id": "nordic-bank",
+    "name": "Nordic Bank Consortium",
+    "idp": "Okta",
+    "ssoDomain": "nordicbank.example",
+    "allowedCidrs": ["10.20.0.0/16"]
+  },
+  {
+    "id": "helsinki-hospital",
+    "name": "Helsinki University Hospital",
+    "idp": "Google Workspace",
+    "ssoDomain": "hus.example",
+    "allowedCidrs": ["172.16.5.0/24", "198.51.100.0/24"]
+  }
+]

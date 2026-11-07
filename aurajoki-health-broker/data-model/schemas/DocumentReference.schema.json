@@ -1,0 +1,112 @@
+{
+ "$schema": "http://json-schema.org/schema#",
+ "$id": "https://smartdatamodels.org/dataModel.Hl7/DocumentReference/schema.json",
+ "title": "Health ED (FIWARE proposal, flattened SDM dataModel.Hl7 profile) - DocumentReference",
+ "description": "Physician or triage-nurse note (Finnish, Swedish or English). Free text with identifying items.",
+ "modelTags": "Health, FHIR R4B, data classification",
+ "x-fhir-r4b-resource": "DocumentReference",
+ "x-ngsi-ld-scope": [
+  "/Classification/Restricted/FreeText"
+ ],
+ "type": "object",
+ "required": [
+  "id",
+  "type",
+  "scope"
+ ],
+ "properties": {
+  "id": {
+   "type": "string",
+   "format": "uri"
+  },
+  "type": {
+   "type": "string",
+   "enum": [
+    "DocumentReference"
+   ]
+  },
+  "scope": {
+   "description": "NGSI-LD scope = classification tier of the entity.",
+   "oneOf": [
+    {
+     "type": "string",
+     "enum": [
+      "/Classification/Restricted/FreeText"
+     ]
+    },
+    {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   ]
+  },
+  "identifier": {
+   "type": "string",
+   "description": "Property. Note id.",
+   "x-ngsi-ld-classification": "/Classification/Restricted/FreeText",
+   "x-fhir-r4b": "DocumentReference.identifier"
+  },
+  "noteType": {
+   "type": "string",
+   "enum": [
+    "physician",
+    "nurse_triage"
+   ],
+   "description": "Property. Kind of note.",
+   "x-ngsi-ld-classification": "/Classification/Restricted/FreeText",
+   "x-fhir-r4b": "DocumentReference.type"
+  },
+  "subject": {
+   "type": "string",
+   "format": "uri",
+   "description": "Relationship. The Patient.",
+   "x-ngsi-ld-classification": "/Classification/Restricted/FreeText",
+   "x-fhir-r4b": "DocumentReference.subject"
+  },
+  "encounter": {
+   "type": "string",
+   "format": "uri",
+   "description": "Relationship. The Encounter.",
+   "x-ngsi-ld-classification": "/Classification/Restricted/FreeText",
+   "x-fhir-r4b": "DocumentReference.context.encounter"
+  },
+  "author": {
+   "type": "string",
+   "format": "uri",
+   "description": "Relationship. The Practitioner who wrote it.",
+   "x-ngsi-ld-classification": "/Classification/Restricted/FreeText",
+   "x-fhir-r4b": "DocumentReference.author"
+  },
+  "authoredDateTime": {
+   "type": "string",
+   "format": "date-time",
+   "description": "Property. Time written (UTC).",
+   "x-ngsi-ld-classification": "/Classification/Restricted/FreeText",
+   "x-fhir-r4b": "DocumentReference.date"
+  },
+  "language": {
+   "type": "string",
+   "enum": [
+    "fi",
+    "sv",
+    "en"
+   ],
+   "description": "Property. Language.",
+   "x-ngsi-ld-classification": "/Classification/Restricted/FreeText",
+   "x-fhir-r4b": "DocumentReference.content.attachment.language"
+  },
+  "text": {
+   "type": "string",
+   "description": "Property. Note text.",
+   "x-ngsi-ld-classification": "/Classification/Restricted/FreeText",
+   "x-fhir-r4b": "DocumentReference.content.attachment.data"
+  },
+  "dataProvider": {
+   "type": "string",
+   "description": "Property. Source of the data.",
+   "x-ngsi-ld-classification": "entity scope"
+  }
+ }
+}

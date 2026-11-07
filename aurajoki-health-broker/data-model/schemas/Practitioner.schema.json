@@ -1,0 +1,76 @@
+{
+ "$schema": "http://json-schema.org/schema#",
+ "$id": "https://smartdatamodels.org/dataModel.Hl7/Practitioner/schema.json",
+ "title": "Health ED (FIWARE proposal, flattened SDM dataModel.Hl7 profile) - Practitioner",
+ "description": "ED staff member (physician or triage nurse).",
+ "modelTags": "Health, FHIR R4B, data classification",
+ "x-fhir-r4b-resource": "Practitioner",
+ "x-ngsi-ld-scope": [
+  "/Classification/Internal/Staff"
+ ],
+ "type": "object",
+ "required": [
+  "id",
+  "type",
+  "scope"
+ ],
+ "properties": {
+  "id": {
+   "type": "string",
+   "format": "uri"
+  },
+  "type": {
+   "type": "string",
+   "enum": [
+    "Practitioner"
+   ]
+  },
+  "scope": {
+   "description": "NGSI-LD scope = classification tier of the entity.",
+   "oneOf": [
+    {
+     "type": "string",
+     "enum": [
+      "/Classification/Internal/Staff"
+     ]
+    },
+    {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   ]
+  },
+  "identifier": {
+   "type": "string",
+   "description": "Property. Staff id (STAFF-nnnnn).",
+   "x-ngsi-ld-classification": "/Classification/Internal/Staff",
+   "x-fhir-r4b": "Practitioner.identifier"
+  },
+  "name": {
+   "type": "string",
+   "description": "Property. Full name.",
+   "x-ngsi-ld-classification": "/Classification/Internal/Staff",
+   "x-fhir-r4b": "Practitioner.name"
+  },
+  "role": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "enum": [
+     "physician",
+     "triage-nurse"
+    ]
+   },
+   "description": "Property. Roles seen in the data.",
+   "x-ngsi-ld-classification": "/Classification/Internal/Staff",
+   "x-fhir-r4b": "PractitionerRole.code"
+  },
+  "dataProvider": {
+   "type": "string",
+   "description": "Property. Source of the data.",
+   "x-ngsi-ld-classification": "entity scope"
+  }
+ }
+}

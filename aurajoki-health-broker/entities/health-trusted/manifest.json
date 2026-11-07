@@ -1,0 +1,157 @@
+[
+ {
+  "file": "01_practitioners.json",
+  "type": "Practitioner",
+  "count": 400
+ },
+ {
+  "file": "02_patients_01.json",
+  "type": "Patient",
+  "count": 10000
+ },
+ {
+  "file": "02_patients_02.json",
+  "type": "Patient",
+  "count": 10000
+ },
+ {
+  "file": "02_patients_03.json",
+  "type": "Patient",
+  "count": 6873
+ },
+ {
+  "file": "03_encounters_01.json",
+  "type": "Encounter",
+  "count": 10000
+ },
+ {
+  "file": "03_encounters_02.json",
+  "type": "Encounter",
+  "count": 10000
+ },
+ {
+  "file": "03_encounters_03.json",
+  "type": "Encounter",
+  "count": 10000
+ },
+ {
+  "file": "03_encounters_04.json",
+  "type": "Encounter",
+  "count": 10000
+ },
+ {
+  "file": "03_encounters_05.json",
+  "type": "Encounter",
+  "count": 6398
+ },
+ {
+  "file": "04_observations_01.json",
+  "type": "Observation",
+  "count": 10000
+ },
+ {
+  "file": "04_observations_02.json",
+  "type": "Observation",
+  "count": 10000
+ },
+ {
+  "file": "04_observations_03.json",
+  "type": "Observation",
+  "count": 10000
+ },
+ {
+  "file": "04_observations_04.json",
+  "type": "Observation",
+  "count": 10000
+ },
+ {
+  "file": "04_observations_05.json",
+  "type": "Observation",
+  "count": 10000
+ },
+ {
+  "file": "04_observations_06.json",
+  "type": "Observation",
+  "count": 10000
+ },
+ {
+  "file": "04_observations_07.json",
+  "type": "Observation",
+  "count": 10000
+ },
+ {
+  "file": "04_observations_08.json",
+  "type": "Observation",
+  "count": 10000
+ },
+ {
+  "file": "04_observations_09.json",
+  "type": "Observation",
+  "count": 10000
+ },
+ {
+  "file": "04_observations_10.json",
+  "type": "Observation",
+  "count": 10000
+ },
+ {
+  "file": "04_observations_11.json",
+  "type": "Observation",
+  "count": 10000
+ },
+ {
+  "file": "04_observations_12.json",
+  "type": "Observation",
+  "count": 10000
+ },
+ {
+  "file": "04_observations_13.json",
+  "type": "Observation",
+  "count": 10000
+ },
+ {
+  "file": "04_observations_14.json",
+  "type": "Observation",
+  "count": 341
+ },
+ {
+  "file": "05_document_references_01.json",
+  "type": "DocumentReference",
+  "count": 10000
+ },
+ {
+  "file": "05_document_references_02.json",
+  "type": "DocumentReference",
+  "count": 10000
+ },
+ {
+  "file": "05_document_references_03.json",
+  "type": "DocumentReference",
+  "count": 10000
+ },
+ {
+  "file": "05_document_references_04.json",
+  "type": "DocumentReference",
+  "count": 103
+ },
+ {
+  "file": "06_ed_weekly_statistics_01.json",
+  "type": "EDWeeklyStatistic",
+  "count": 10000
+ },
+ {
+  "file": "06_ed_weekly_statistics_02.json",
+  "type": "EDWeeklyStatistic",
+  "count": 10000
+ },
+ {
+  "file": "06_ed_weekly_statistics_03.json",
+  "type": "EDWeeklyStatistic",
+  "count": 10000
+ },
+ {
+  "file": "06_ed_weekly_statistics_04.json",
+  "type": "EDWeeklyStatistic",
+  "count": 169
+ }
+]

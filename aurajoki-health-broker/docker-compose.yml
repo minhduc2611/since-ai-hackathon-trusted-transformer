@@ -1,0 +1,72 @@
+# Aurajoki ED (synthetic health data) – NGSI-LD broker for the data-classification use case
+# Tenant: health-trusted  ·  Broker: coraine (in-memory)  ·  everything bound to 127.0.0.1 only
+#
+#   docker compose up -d            start broker + load the data (loader runs once, ~5–10 min)
+#   docker compose logs -f loader   follow the load
+#   docker compose down             stop (in-memory: data is gone; next "up" reloads it)
+
+name: aurajoki-health
+
+services:
+
+  # ── serves data-model/context.jsonld to the broker (short names instead of IRIs) ──
+  health-context:
+    image: python:3.12-slim
+    container_name: health-context
+    command: ["python", "-m", "http.server", "8080", "--directory", "/data-model"]
+    volumes:
+      - ./data-model:/data-model:ro
+    ports:
+      - "127.0.0.1:8090:8080"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/context.jsonld')"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  # ── NGSI-LD context broker ──────────────────────────────────────────────────────
+  coraine:
+    image: quay.io/seamware/coraine:0.7.0
+    container_name: health-coraine
+    command: >
+      --database corDB
+      --apiPlugins admin
+      --pretty-print 2
+      --corsOrigin __ALL
+      --defaultUserContext http://health-context:8080/context.jsonld
+    ports:
+      - "127.0.0.1:1026:1026"
+    depends_on:
+      health-context:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:1026/ngsi-ld/v1/types"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  # ── one-shot loader: entities/health-trusted -> tenant health-trusted ───────────
+  loader:
+    image: python:3.12-slim
+    container_name: health-loader
+    working_dir: /app
+    command:
+      - python
+      - scripts/load_to_broker.py
+      - --broker=http://coraine:1026
+      - --tenant=health-trusted
+      - --context-mode=url
+      - --context-url=http://health-context:8080/context.jsonld
+      - --batch-size=100
+    environment:
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ./scripts:/app/scripts:ro
+      - ./entities:/app/entities:ro
+      - ./data-model:/app/data-model:ro
+    depends_on:
+      coraine:
+        condition: service_healthy
+    restart: "no"

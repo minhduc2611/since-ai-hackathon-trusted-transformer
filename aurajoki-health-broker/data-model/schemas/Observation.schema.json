@@ -1,0 +1,128 @@
+{
+ "$schema": "http://json-schema.org/schema#",
+ "$id": "https://smartdatamodels.org/dataModel.Hl7/Observation/schema.json",
+ "title": "Health ED (FIWARE proposal, flattened SDM dataModel.Hl7 profile) - Observation",
+ "description": "One laboratory result taken during an ED visit.",
+ "modelTags": "Health, FHIR R4B, data classification",
+ "x-fhir-r4b-resource": "Observation",
+ "x-ngsi-ld-scope": [
+  "/Classification/Confidential/HealthData"
+ ],
+ "type": "object",
+ "required": [
+  "id",
+  "type",
+  "scope"
+ ],
+ "properties": {
+  "id": {
+   "type": "string",
+   "format": "uri"
+  },
+  "type": {
+   "type": "string",
+   "enum": [
+    "Observation"
+   ]
+  },
+  "scope": {
+   "description": "NGSI-LD scope = classification tier of the entity.",
+   "oneOf": [
+    {
+     "type": "string",
+     "enum": [
+      "/Classification/Confidential/HealthData"
+     ]
+    },
+    {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   ]
+  },
+  "identifier": {
+   "type": "string",
+   "description": "Property. Lab result id.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Observation.identifier"
+  },
+  "category": {
+   "type": "string",
+   "enum": [
+    "laboratory"
+   ],
+   "description": "Property. Observation category.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Observation.category"
+  },
+  "code": {
+   "type": "string",
+   "description": "Property. Finnish lab test code (e.g. P-CRP).",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Observation.code"
+  },
+  "name": {
+   "type": "string",
+   "description": "Property. Test name.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Observation.code.text"
+  },
+  "subject": {
+   "type": "string",
+   "format": "uri",
+   "description": "Relationship. The Patient (pseudonymous id).",
+   "x-ngsi-ld-classification": "/Classification/Confidential/Pseudonym",
+   "x-fhir-r4b": "Observation.subject"
+  },
+  "encounter": {
+   "type": "string",
+   "format": "uri",
+   "description": "Relationship. The Encounter.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Observation.encounter"
+  },
+  "effectiveDateTime": {
+   "type": "string",
+   "format": "date-time",
+   "description": "Property. Sampling time (UTC).",
+   "x-ngsi-ld-classification": "/Classification/Confidential/QuasiIdentifier",
+   "x-fhir-r4b": "Observation.effectiveDateTime"
+  },
+  "valueQuantity": {
+   "type": "number",
+   "description": "Property. Numeric result; unit in unitText.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Observation.valueQuantity"
+  },
+  "valueString": {
+   "type": "string",
+   "description": "Property. Non-numeric result (POS/NEG ...).",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Observation.valueString"
+  },
+  "referenceRange": {
+   "type": "string",
+   "description": "Property. Reference range as text.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Observation.referenceRange.text"
+  },
+  "interpretation": {
+   "type": "string",
+   "enum": [
+    "H",
+    "L",
+    "A"
+   ],
+   "description": "Property. H high, L low, A abnormal; absent = not flagged.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Observation.interpretation"
+  },
+  "dataProvider": {
+   "type": "string",
+   "description": "Property. Source of the data.",
+   "x-ngsi-ld-classification": "entity scope"
+  }
+ }
+}

@@ -1,0 +1,255 @@
+{
+ "$schema": "http://json-schema.org/schema#",
+ "$id": "https://smartdatamodels.org/dataModel.Hl7/Encounter/schema.json",
+ "title": "Health ED (FIWARE proposal, flattened SDM dataModel.Hl7 profile) - Encounter",
+ "description": "One emergency-department visit: arrival, triage, diagnoses, vital signs at triage, length of stay and disposition. Pseudonymised: the patient is a Relationship to a Patient id.",
+ "modelTags": "Health, FHIR R4B, data classification",
+ "x-fhir-r4b-resource": "Encounter",
+ "x-ngsi-ld-scope": [
+  "/Classification/Confidential/HealthData"
+ ],
+ "type": "object",
+ "required": [
+  "id",
+  "type",
+  "scope"
+ ],
+ "properties": {
+  "id": {
+   "type": "string",
+   "format": "uri"
+  },
+  "type": {
+   "type": "string",
+   "enum": [
+    "Encounter"
+   ]
+  },
+  "scope": {
+   "description": "NGSI-LD scope = classification tier of the entity.",
+   "oneOf": [
+    {
+     "type": "string",
+     "enum": [
+      "/Classification/Confidential/HealthData"
+     ]
+    },
+    {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   ]
+  },
+  "identifier": {
+   "type": "string",
+   "description": "Property. Visit id (ED25-nnnnnn).",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Encounter.identifier"
+  },
+  "encounterClass": {
+   "type": "string",
+   "enum": [
+    "EMER"
+   ],
+   "description": "Property. HL7 v3 ActCode, always EMER.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Encounter.class"
+  },
+  "subject": {
+   "type": "string",
+   "format": "uri",
+   "description": "Relationship. The Patient (pseudonymous id).",
+   "x-ngsi-ld-classification": "/Classification/Confidential/Pseudonym",
+   "x-fhir-r4b": "Encounter.subject"
+  },
+  "attendingPractitioner": {
+   "type": "string",
+   "format": "uri",
+   "description": "Relationship. Attending physician.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Encounter.participant.individual"
+  },
+  "arrivalDateTime": {
+   "type": "string",
+   "format": "date-time",
+   "description": "Property. Arrival time (UTC).",
+   "x-ngsi-ld-classification": "/Classification/Confidential/QuasiIdentifier",
+   "x-fhir-r4b": "Encounter.period.start"
+  },
+  "dischargeDateTime": {
+   "type": "string",
+   "format": "date-time",
+   "description": "Property. Discharge time (UTC).",
+   "x-ngsi-ld-classification": "/Classification/Confidential/QuasiIdentifier",
+   "x-fhir-r4b": "Encounter.period.end"
+  },
+  "arrivalMode": {
+   "type": "string",
+   "enum": [
+    "walk-in",
+    "ambulance",
+    "police",
+    "helicopter"
+   ],
+   "description": "Property. How the patient arrived.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Encounter.hospitalization.admitSource"
+  },
+  "ambulanceUnit": {
+   "type": "string",
+   "description": "Property. Ambulance call sign (AU-xxx-nn). Has a `classification` sub-property in the data.",
+   "x-ngsi-ld-classification": "/Classification/Restricted/QuasiIdentifier"
+  },
+  "triageCategory": {
+   "type": "string",
+   "enum": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+   ],
+   "description": "Property. Finnish ABCDE triage: A immediate ... E non-urgent.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Encounter.priority"
+  },
+  "chiefComplaint": {
+   "type": "string",
+   "description": "Property. Chief complaint, free text (fi/sv/en). Contains identifying items; has a `classification` sub-property in the data.",
+   "x-ngsi-ld-classification": "/Classification/Restricted/FreeText",
+   "x-fhir-r4b": "Encounter.reasonCode.text"
+  },
+  "primaryDiagnosis": {
+   "type": "string",
+   "description": "Property. Primary diagnosis, ICD-10 code.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Encounter.diagnosis (rank 1)"
+  },
+  "secondaryDiagnosis": {
+   "type": "string",
+   "description": "Property. Secondary diagnosis, ICD-10 code.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Encounter.diagnosis (rank 2)"
+  },
+  "systolicBloodPressure": {
+   "type": "number",
+   "description": "Property. Units:'mmHg'. At triage.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Observation 8480-6"
+  },
+  "diastolicBloodPressure": {
+   "type": "number",
+   "description": "Property. Units:'mmHg'. At triage.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Observation 8462-4"
+  },
+  "heartRate": {
+   "type": "number",
+   "description": "Property. Units:'/min'. At triage.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Observation 8867-4"
+  },
+  "respiratoryRate": {
+   "type": "number",
+   "description": "Property. Units:'/min'. At triage.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Observation 9279-1"
+  },
+  "bodyTemperature": {
+   "type": "number",
+   "description": "Property. Units:'Cel'. At triage.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Observation 8310-5"
+  },
+  "oxygenSaturation": {
+   "type": "number",
+   "description": "Property. Units:'%'. At triage.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Observation 59408-5"
+  },
+  "painScore": {
+   "type": "integer",
+   "minimum": 0,
+   "maximum": 10,
+   "description": "Property. Numeric rating scale 0-10.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Observation 72514-3"
+  },
+  "lengthOfStay": {
+   "type": "integer",
+   "description": "Property. Units:'min'.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Encounter.length"
+  },
+  "dischargeDisposition": {
+   "type": "string",
+   "enum": [
+    "home",
+    "admitted_ward",
+    "icu",
+    "transfer",
+    "left_without_being_seen",
+    "cancelled_duplicate",
+    "died"
+   ],
+   "description": "Property. Disposition.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData",
+   "x-fhir-r4b": "Encounter.hospitalization.dischargeDisposition"
+  },
+  "readmittedWithin30Days": {
+   "type": "boolean",
+   "description": "Property. Revisit within 30 days.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData"
+  },
+  "ageAtArrival": {
+   "type": "integer",
+   "description": "Property. Units:'years'. Exact age.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/QuasiIdentifier"
+  },
+  "ageBand": {
+   "type": "string",
+   "enum": [
+    "0-9",
+    "10-19",
+    "20-29",
+    "30-39",
+    "40-49",
+    "50-59",
+    "60-69",
+    "70-79",
+    "80+"
+   ],
+   "description": "Property. Ten-year age band.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData"
+  },
+  "sex": {
+   "type": "string",
+   "enum": [
+    "F",
+    "M"
+   ],
+   "description": "Property. Sex.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData"
+  },
+  "residenceMunicipality": {
+   "type": "string",
+   "description": "Property. Home municipality, or 'non-resident'.",
+   "x-ngsi-ld-classification": "/Classification/Confidential/QuasiIdentifier"
+  },
+  "missingAttributes": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "Property. Attributes absent in the source (NGSI-LD has no null).",
+   "x-ngsi-ld-classification": "/Classification/Confidential/HealthData"
+  },
+  "dataProvider": {
+   "type": "string",
+   "description": "Property. Source of the data.",
+   "x-ngsi-ld-classification": "entity scope"
+  }
+ }
+}

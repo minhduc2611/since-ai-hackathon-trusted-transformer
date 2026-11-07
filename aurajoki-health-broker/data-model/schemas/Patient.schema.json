@@ -1,0 +1,107 @@
+{
+ "$schema": "http://json-schema.org/schema#",
+ "$id": "https://smartdatamodels.org/dataModel.Hl7/Patient/schema.json",
+ "title": "Health ED (FIWARE proposal, flattened SDM dataModel.Hl7 profile) - Patient",
+ "description": "A person who visited the emergency department. Holds ONLY direct identifiers; the clinical record lives in Encounter/Observation, linked by a pseudonymous id.",
+ "modelTags": "Health, FHIR R4B, data classification",
+ "x-fhir-r4b-resource": "Patient",
+ "x-ngsi-ld-scope": [
+  "/Classification/Restricted/DirectIdentifier"
+ ],
+ "type": "object",
+ "required": [
+  "id",
+  "type",
+  "scope"
+ ],
+ "properties": {
+  "id": {
+   "type": "string",
+   "format": "uri"
+  },
+  "type": {
+   "type": "string",
+   "enum": [
+    "Patient"
+   ]
+  },
+  "scope": {
+   "description": "NGSI-LD scope = classification tier of the entity.",
+   "oneOf": [
+    {
+     "type": "string",
+     "enum": [
+      "/Classification/Restricted/DirectIdentifier"
+     ]
+    },
+    {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   ]
+  },
+  "identifier": {
+   "type": "string",
+   "description": "Property. Finnish personal identity code (henkilötunnus). Sub-property system = urn:oid:1.2.246.21.",
+   "x-ngsi-ld-classification": "/Classification/Restricted/DirectIdentifier",
+   "x-fhir-r4b": "Patient.identifier"
+  },
+  "name": {
+   "type": "string",
+   "description": "Property. Full name as recorded.",
+   "x-ngsi-ld-classification": "/Classification/Restricted/DirectIdentifier",
+   "x-fhir-r4b": "Patient.name"
+  },
+  "birthDate": {
+   "type": "string",
+   "format": "date",
+   "description": "Property. Date of birth (from record or identity code).",
+   "x-ngsi-ld-classification": "/Classification/Restricted/DirectIdentifier",
+   "x-fhir-r4b": "Patient.birthDate"
+  },
+  "gender": {
+   "type": "string",
+   "enum": [
+    "female",
+    "male",
+    "other",
+    "unknown"
+   ],
+   "description": "Property. Administrative gender.",
+   "x-ngsi-ld-classification": "/Classification/Restricted/DirectIdentifier",
+   "x-fhir-r4b": "Patient.gender"
+  },
+  "telephone": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "Property. Phone numbers seen across visits, E.164.",
+   "x-ngsi-ld-classification": "/Classification/Restricted/DirectIdentifier",
+   "x-fhir-r4b": "Patient.telecom"
+  },
+  "address": {
+   "type": "object",
+   "description": "Property. Home address (SDM address object). Non-residents: city and country only.",
+   "x-ngsi-ld-classification": "/Classification/Restricted/DirectIdentifier",
+   "x-fhir-r4b": "Patient.address"
+  },
+  "identityStatus": {
+   "type": "string",
+   "enum": [
+    "identified",
+    "identified-without-identity-code",
+    "unidentified"
+   ],
+   "description": "Property. Whether the person was identified at the ED.",
+   "x-ngsi-ld-classification": "/Classification/Restricted/DirectIdentifier"
+  },
+  "dataProvider": {
+   "type": "string",
+   "description": "Property. Source of the data.",
+   "x-ngsi-ld-classification": "entity scope"
+  }
+ }
+}

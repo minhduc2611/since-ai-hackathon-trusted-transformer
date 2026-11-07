@@ -1,0 +1,144 @@
+<mxfile host="app.diagrams.net" modified="2026-11-07T08:17:00.000Z" agent="Cursor" version="22.1.0" type="device">
+  <diagram id="pipeline" name="TrustED PETs Pipeline">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="TrustED PETs Transformer — Detect → Select → Transform → Demonstrate" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;fontSize=18;fontColor=#E6EDF3;" vertex="1" parent="1">
+          <mxGeometry x="200" y="40" width="1200" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ===== DETECT ===== -->
+        <mxCell id="box1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#171E26;strokeColor=#4FB3A9;strokeWidth=2;dashed=1;dashPattern=8 8;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="340" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="h1" value="1 · Detect" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;fontSize=20;fontColor=#E6EDF3;" vertex="1" parent="1">
+          <mxGeometry x="40" y="90" width="340" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="d-sub" value="What kind of data is this column?" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=12;fontColor=#8B98A5;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="50" y="140" width="320" height="24" as="geometry" />
+        </mxCell>
+
+        <mxCell id="d-code" value="&lt;b&gt;Code&lt;/b&gt;&lt;br&gt;Name + value regex&lt;br&gt;→ role + subtype" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2C2A4A;strokeColor=#B4A7FF;fontColor=#E6EDF3;align=center;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="70" y="190" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="d-gemma" value="&lt;b&gt;Gemma 4&lt;/b&gt;&lt;br&gt;If confidence low&lt;br&gt;(budget ≤ 40)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1F3A37;strokeColor=#4FB3A9;fontColor=#E6EDF3;align=center;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="220" y="190" width="130" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="d-out" value="&lt;b&gt;Output&lt;/b&gt;&lt;br&gt;field_labels.json&lt;br&gt;privacy_role · subtype · confidence&lt;br&gt;&lt;i&gt;not&lt;/i&gt; the PET yet" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F1419;strokeColor=#2A3440;fontColor=#E6EDF3;align=center;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="70" y="320" width="280" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="d-note" value="Human does not label types here" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=11;fontColor=#8B98A5;" vertex="1" parent="1">
+          <mxGeometry x="70" y="430" width="280" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow 1→2 -->
+        <mxCell id="a12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4FB3A9;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="box1" target="box2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== SELECT ===== -->
+        <mxCell id="box2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#171E26;strokeColor=#4FB3A9;strokeWidth=2;dashed=1;dashPattern=8 8;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="440" y="120" width="340" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="h2" value="2 · Select" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;fontSize=20;fontColor=#E6EDF3;" vertex="1" parent="1">
+          <mxGeometry x="440" y="90" width="340" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="s-sub" value="How should we protect it? (PET plan)" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=12;fontColor=#8B98A5;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="450" y="140" width="320" height="24" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s-code" value="&lt;b&gt;Code&lt;/b&gt;&lt;br&gt;Trust × role policy&lt;br&gt;+ utility tasks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2C2A4A;strokeColor=#B4A7FF;fontColor=#E6EDF3;align=center;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="460" y="190" width="95" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="s-gemma" value="&lt;b&gt;Gemma 4&lt;/b&gt;&lt;br&gt;Optional refine&lt;br&gt;(GEMMA_SELECT=1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1F3A37;strokeColor=#4FB3A9;fontColor=#E6EDF3;align=center;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="565" y="190" width="95" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="s-human" value="&lt;b&gt;Human&lt;/b&gt;&lt;br&gt;UI overrides&lt;br&gt;decided_by=human" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3D3420;strokeColor=#E3B341;fontColor=#E6EDF3;align=center;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="670" y="190" width="95" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s-pets" value="suppress · pseudonym · generalise · redact · keep" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F1419;strokeColor=#2A3440;fontColor=#8B98A5;align=center;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="460" y="290" width="305" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s-out" value="&lt;b&gt;Output&lt;/b&gt;&lt;br&gt;pet_plan.json / .csv&lt;br&gt;+ pet_overrides.json (human)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F1419;strokeColor=#2A3440;fontColor=#E6EDF3;align=center;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="460" y="350" width="305" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="s-note" value="Scenario trust: public / research / contractual" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=11;fontColor=#8B98A5;" vertex="1" parent="1">
+          <mxGeometry x="460" y="450" width="305" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow 2→3 -->
+        <mxCell id="a23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4FB3A9;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="box2" target="box3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== TRANSFORM ===== -->
+        <mxCell id="box3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#171E26;strokeColor=#4FB3A9;strokeWidth=2;dashed=1;dashPattern=8 8;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="840" y="120" width="340" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="h3" value="3 · Transform" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;fontSize=20;fontColor=#E6EDF3;" vertex="1" parent="1">
+          <mxGeometry x="840" y="90" width="340" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="t-sub" value="Apply the PET plan to the tables" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=12;fontColor=#8B98A5;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="850" y="140" width="320" height="24" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t-code" value="&lt;b&gt;Code only&lt;/b&gt;&lt;br&gt;HMAC · redact dict&lt;br&gt;generalise · k=5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2C2A4A;strokeColor=#B4A7FF;fontColor=#E6EDF3;align=center;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="920" y="190" width="180" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t-steps" value="1. Redaction dictionary from IDs&lt;br&gt;2. Per-column PET&lt;br&gt;3. Rare-category merge&lt;br&gt;4. k-anonymity blanking&lt;br&gt;(health+public → DP path)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F1419;strokeColor=#2A3440;fontColor=#E6EDF3;align=left;spacingLeft=12;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="870" y="290" width="280" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="t-out" value="&lt;b&gt;Output&lt;/b&gt; protected/*.csv" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=12;fontColor=#8B98A5;" vertex="1" parent="1">
+          <mxGeometry x="870" y="420" width="280" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow 3→4 -->
+        <mxCell id="a34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4FB3A9;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="box3" target="box4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== DEMONSTRATE ===== -->
+        <mxCell id="box4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#171E26;strokeColor=#4FB3A9;strokeWidth=2;dashed=1;dashPattern=8 8;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="120" width="340" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="h4" value="4 · Demonstrate" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;fontSize=20;fontColor=#E6EDF3;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="90" width="340" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="e-sub" value="Score with TrustED pets-eval" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=12;fontColor=#8B98A5;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="140" width="320" height="24" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e-code" value="&lt;b&gt;Code&lt;/b&gt;&lt;br&gt;Python pets-eval&lt;br&gt;scorecard CLI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2C2A4A;strokeColor=#B4A7FF;fontColor=#E6EDF3;align=center;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="190" width="180" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e-scores" value="&lt;b&gt;Privacy&lt;/b&gt; 1 − (0.5·worst + 0.5·mean risk)&lt;br&gt;&lt;b&gt;Utility&lt;/b&gt; mean of scenario tasks&lt;br&gt;&lt;b&gt;Composite&lt;/b&gt; weighted harmonic mean" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F1419;strokeColor=#2A3440;fontColor=#E6EDF3;align=left;spacingLeft=12;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="290" width="280" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="e-out" value="&lt;b&gt;Output&lt;/b&gt; scorecard.json / .html + UI Result panel" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=12;fontColor=#8B98A5;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="400" width="280" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="leg" value="Legend" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontStyle=1;fontSize=13;fontColor=#E6EDF3;" vertex="1" parent="1">
+          <mxGeometry x="40" y="570" width="100" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="leg1" value="Code (rules / policy / PETs / eval)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2C2A4A;strokeColor=#B4A7FF;fontColor=#E6EDF3;align=center;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="600" width="220" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2" value="Gemma 4 (Ollama)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1F3A37;strokeColor=#4FB3A9;fontColor=#E6EDF3;align=center;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="280" y="600" width="160" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="leg3" value="Human (PET plan overrides)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3D3420;strokeColor=#E3B341;fontColor=#E6EDF3;align=center;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="460" y="600" width="200" height="36" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
